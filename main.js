@@ -2,7 +2,7 @@
  *
  * CONFIGURACIÓN (editar solo este bloque):
  * - ENDPOINT_FORMULARIO: endpoint AJAX de FormSubmit. El primer envío dispara
- *   un correo de activación a angelagl@grupoloang.com; hay que pulsar el
+ *   un correo de activación a angelagrondonalopez@gmail.com; hay que pulsar el
  *   enlace para que las solicitudes empiecen a llegar (FormSubmit guarda las
  *   anteriores hasta 30 días).
  * - TELEFONO: número de contacto en formato internacional, p. ej. '+34639792807'.
@@ -13,7 +13,7 @@
 (function () {
   'use strict';
 
-  var ENDPOINT_FORMULARIO = 'https://formsubmit.co/ajax/angelagl@grupoloang.com';
+  var ENDPOINT_FORMULARIO = 'https://formsubmit.co/ajax/angelagrondonalopez@gmail.com';
   var TELEFONO = '+34639792807';
   var ADS_ID = '';
   var ADS_CONV_FORM = '';
