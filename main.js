@@ -148,7 +148,7 @@
     var lento = setTimeout(function () { btn.innerHTML = 'Enviando… puede tardar unos segundos'; }, 8000);
 
     var ctl = ('AbortController' in window) ? new AbortController() : null;
-    var tm = setTimeout(function () { if (ctl) ctl.abort(); }, 30000);
+    var tm = setTimeout(function () { if (ctl) ctl.abort(); }, 60000);
 
     fetch(ENDPOINT_FORMULARIO, {
       method: 'POST',
