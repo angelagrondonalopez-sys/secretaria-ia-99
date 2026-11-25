@@ -1,0 +1,10 @@
+# Despliegue estático en Render (sin paso de build).
+# Landing SEO e indexable: Secretaria virtual IA económica (99 €/mes + IVA).
+# publishPath / staticPublishPath: '.' = la raíz de este directorio.
+services:
+  - type: web
+    name: secretaria-ia-economica
+    runtime: static
+    buildCommand: ""
+    publishPath: .
+    staticPublishPath: .
