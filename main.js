@@ -1,10 +1,10 @@
-/* Secretaria IA · Grupo Loang — lógica de la landing (borrador)
+/* Secretaria IA · Grupo Loang — lógica de la landing
  *
  * CONFIGURACIÓN (editar solo este bloque):
- * - ENDPOINT_FORMULARIO: URL de tu webhook o CRM (Make, Zapier, endpoint propio, alias
- *   cifrado de un servicio de envío…). NO pongas nunca un correo en este archivo.
- *   Si se deja vacío, el formulario valida los datos pero no envía nada y avisa
- *   de que esto es un borrador.
+ * - ENDPOINT_FORMULARIO: endpoint AJAX de FormSubmit. El primer envío dispara
+ *   un correo de activación a angelagl@grupoloang.com; hay que pulsar el
+ *   enlace para que las solicitudes empiecen a llegar (FormSubmit guarda las
+ *   anteriores hasta 30 días).
  * - TELEFONO: número de contacto en formato internacional, p. ej. '+34639792807'.
  *   Vacío = se muestra «pendiente» y el botón Llamar lleva al formulario.
  * - ADS_ID / ADS_CONV_FORM / ADS_CONV_TEL: IDs de Google Ads cuando estén listos.
@@ -13,7 +13,7 @@
 (function () {
   'use strict';
 
-  var ENDPOINT_FORMULARIO = '';
+  var ENDPOINT_FORMULARIO = 'https://formsubmit.co/ajax/angelagl@grupoloang.com';
   var TELEFONO = '+34639792807';
   var ADS_ID = '';
   var ADS_CONV_FORM = '';
@@ -106,32 +106,40 @@
     var btn = form.querySelector('button[type=submit]');
     var ok = document.getElementById('okmsg');
     var err = document.getElementById('errmsg');
-    var draft = document.getElementById('draftmsg');
     var txtBtn = btn.innerHTML;
     function hideMsgs() {
-      [ok, err, draft].forEach(function (n) { if (n) n.style.display = 'none'; });
+      [ok, err].forEach(function (n) { if (n) n.style.display = 'none'; });
     }
     function val(n) {
       var el = form.elements[n];
       return el ? String(el.value || '').trim() : '';
     }
+    var landing = form.getAttribute('data-landing') || (val('plan').indexOf('149') !== -1 ? '149' : '99');
     var datos = {
       Nombre: val('nombre'),
       Telefono: val('telefono'),
       'Negocio o sector': val('sector'),
       Provincia: val('provincia'),
       Plan: val('plan') || 'No indicado',
+      Landing: landing === '149' ? 'Secretaria IA 149 €' : 'Secretaria IA 99 €',
       'Acepta privacidad y llamada': form.elements['privacidad'] && form.elements['privacidad'].checked ? 'Sí' : 'No',
       GCLID: val('gclid') || '—',
       UTM: val('utm') || '—',
       Pagina: location.href,
-      Fecha: new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' })
+      Fecha: new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' }),
+      _subject: 'Nueva solicitud Secretaria IA ' + (landing === '149' ? '149' : '99') + ' €',
+      _template: 'table',
+      _captcha: 'false',
+      _honey: val('_honey')
     };
 
     hideMsgs();
 
-    if (!ENDPOINT_FORMULARIO) {
-      if (draft) draft.style.display = 'block';
+    /* Honeypot relleno: no enviamos y mostramos el mismo mensaje de éxito. */
+    if (datos._honey) {
+      conv('form');
+      if (ok) ok.style.display = 'block';
+      form.reset();
       return;
     }
 
@@ -150,8 +158,11 @@
     }).then(function (r) {
       clearTimeout(tm);
       if (!r.ok) throw new Error('HTTP ' + r.status);
-      return r.text();
-    }).then(function () {
+      return r.json().then(function (data) { return data; }, function () { return {}; });
+    }).then(function (data) {
+      if (data && (data.success === false || data.success === 'false')) {
+        throw new Error((data && data.message) || 'FormSubmit rejected');
+      }
       clearTimeout(lento);
       conv('form');
       if (ok) ok.style.display = 'block';
