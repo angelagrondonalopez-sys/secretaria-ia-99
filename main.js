@@ -1,10 +1,8 @@
 /* Secretaria IA · Grupo Loang — lógica de la landing
  *
  * CONFIGURACIÓN (editar solo este bloque):
- * - ENDPOINT_FORMULARIO: endpoint AJAX de FormSubmit. El primer envío dispara
- *   un correo de activación a angelagrondonalopez@gmail.com; hay que pulsar el
- *   enlace para que las solicitudes empiecen a llegar (FormSubmit guarda las
- *   anteriores hasta 30 días).
+ * - ENDPOINT_FORMULARIO / WEB3FORMS_KEY: Web3Forms. Las solicitudes llegan a
+ *   angelagrondonalopez@gmail.com (cuenta Web3Forms de Angela, clave pública).
  * - TELEFONO: número de contacto en formato internacional, p. ej. '+34639792807'.
  *   Vacío = se muestra «pendiente» y el botón Llamar lleva al formulario.
  * - ADS_ID / ADS_CONV_FORM / ADS_CONV_TEL: IDs de Google Ads cuando estén listos.
@@ -13,7 +11,8 @@
 (function () {
   'use strict';
 
-  var ENDPOINT_FORMULARIO = 'https://formsubmit.co/ajax/angelagrondonalopez@gmail.com';
+  var ENDPOINT_FORMULARIO = 'https://api.web3forms.com/submit';
+  var WEB3FORMS_KEY = 'c9c65a74-b6ad-419a-87b5-67832e9e779d';
   var TELEFONO = '+34639792807';
   var ADS_ID = '';
   var ADS_CONV_FORM = '';
@@ -127,16 +126,18 @@
       UTM: val('utm') || '—',
       Pagina: location.href,
       Fecha: new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' }),
-      _subject: 'Nueva solicitud Secretaria IA ' + (landing === '149' ? '149' : '99') + ' €',
-      _template: 'table',
-      _captcha: 'false',
+      access_key: WEB3FORMS_KEY,
+      subject: 'Nueva solicitud Secretaria IA ' + (landing === '149' ? '149' : '99') + ' €',
+      from_name: 'Secretaria IA · Grupo Loang',
       _honey: val('_honey')
     };
 
     hideMsgs();
+    var trampa = datos._honey;
+    delete datos._honey;
 
     /* Honeypot relleno: no enviamos y mostramos el mismo mensaje de éxito. */
-    if (datos._honey) {
+    if (trampa) {
       conv('form');
       if (ok) ok.style.display = 'block';
       form.reset();
@@ -161,7 +162,7 @@
       return r.json().then(function (data) { return data; }, function () { return {}; });
     }).then(function (data) {
       if (data && (data.success === false || data.success === 'false')) {
-        throw new Error((data && data.message) || 'FormSubmit rejected');
+        throw new Error((data && data.message) || 'Web3Forms rejected');
       }
       clearTimeout(lento);
       conv('form');
