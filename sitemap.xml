@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- PENDIENTE: sustituir la loc cuando exista el dominio definitivo en Render. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.ejemplo-pendiente.es/secretaria-ia-economica/</loc>
+    <loc>https://secretaria-ia-99.onrender.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>

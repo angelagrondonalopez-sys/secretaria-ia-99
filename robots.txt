@@ -1,6 +1,5 @@
 # Landing SEO e indexable: Secretaria virtual IA económica (99 €/mes + IVA).
-# PENDIENTE: sustituir la URL del Sitemap cuando exista el dominio definitivo en Render.
 User-agent: *
 Allow: /
 
-Sitemap: https://www.ejemplo-pendiente.es/secretaria-ia-economica/sitemap.xml
+Sitemap: https://secretaria-ia-99.onrender.com/sitemap.xml
