@@ -202,7 +202,7 @@
     });
   })();
 
-  /* «Escucha a Sofía»: baja a #demo y reproduce la presentación (gesto del usuario). */
+  /* «Escucha a Cristina»: baja a #demo y reproduce la presentación (gesto del usuario). */
   (function () {
     var demoAudio = document.getElementById('audio-demo-sofia');
     if (!demoAudio) return;
