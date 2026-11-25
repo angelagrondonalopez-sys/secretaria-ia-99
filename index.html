@@ -158,7 +158,7 @@
         </ul>
 
         <div class="hero-cta">
-          <a class="btn btn-g" href="#demo">
+          <a class="btn btn-g" href="#demo" data-play-demo>
             <svg class="ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
             Escucha a Sofía
           </a>
@@ -312,30 +312,29 @@
     <div class="w">
       <p class="kick">Pruébalo antes de decidir</p>
       <h2 class="t" id="h-demo">No te lo creas: escucha a Sofía atender.</h2>
-      <p class="sub">La mejor forma de saber si suena como alguien de tu equipo es oírla. Aquí irá una llamada de ejemplo de Sofía, la secretaria IA, o te llamamos con una demo para tu negocio.</p>
+      <p class="sub">La mejor forma de saber si suena como alguien de tu equipo es oírla. Escucha a Sofía presentarse o déjanos tu teléfono y te llamamos, sin compromiso.</p>
       <div class="demo-g">
-        <div class="phone" aria-label="Reproductor de la llamada de ejemplo de Sofía (pendiente)">
+        <div class="phone" aria-label="Escucha a Sofía presentarse">
           <div class="notch" aria-hidden="true"></div>
           <div class="screen">
             <div class="who-row">
               <div class="ava" aria-hidden="true">S</div>
-              <div><b>Sofía · Secretaria IA</b><span>Llamada de ejemplo · pendiente</span></div>
+              <div><b>Sofía · Secretaria IA</b><span>Presentación</span></div>
             </div>
             <div class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-            <!-- PENDIENTE: audio de la llamada de ejemplo de Sofía. Sustituir el botón por:
-                 <audio controls preload="none" src="llamada-ejemplo-sofia.mp3"></audio> -->
-            <button class="play-ph" type="button" disabled>
-              <svg class="ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-              Audio de Sofía · próximamente
-            </button>
-            <p class="hint">Aquí irá la grabación real de una llamada atendida por Sofía, la Secretaria IA.</p>
+            <!-- Cuando exista la grabación de una llamada real, sustituir presentacion.mp3 por llamada-ejemplo-sofia.mp3:
+                 <audio controls preload="metadata" src="llamada-ejemplo-sofia.mp3"></audio> -->
+            <p class="audio-label">Escucha a Sofía presentarse</p>
+            <audio id="audio-demo-sofia" class="demo-audio" controls preload="metadata" src="presentacion.mp3">
+              Tu navegador no reproduce audio. <a href="presentacion.mp3">Descarga la presentación</a>.
+            </audio>
           </div>
         </div>
         <div>
           <div class="placeholder">
-            <span class="tag-ph">Pendiente · demo de Sofía</span>
+            <span class="tag-ph">Demo de Sofía</span>
             <h3>¿Qué escucharás?</h3>
-            <p>Un cliente llama, pregunta por un servicio, Sofía resuelve sus dudas y se va con la cita reservada en el calendario. Y a ti te llega el contacto, listo para cerrar.</p>
+            <p>Sofía se presenta y te cuenta por qué no puedes perder ni una llamada: atiende las 24 horas, da citas en el calendario y se integra con la centralita que ya tienes.</p>
           </div>
           <div class="hero-cta">
             <a class="btn btn-o" href="#form">Quiero que me llamen</a>

@@ -358,3 +358,6 @@ footer .flag{display:inline-block;background:#3A311E;color:#F6D7A8;font-size:10p
 @media(min-width:720px){
   .audio-card .btn{width:auto;justify-self:center;min-width:280px}
 }
+
+.audio-label{font-size:14px;font-weight:700;text-align:center;margin:4px 0 8px}
+.demo-audio{width:100%;height:40px}

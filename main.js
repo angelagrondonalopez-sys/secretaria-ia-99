@@ -190,3 +190,25 @@
       audio.style.display = 'none';
     });
   })();
+
+  /* «Escucha a Sofía»: baja a #demo y reproduce la presentación (gesto del usuario). */
+  (function () {
+    var demoAudio = document.getElementById('audio-demo-sofia');
+    if (!demoAudio) return;
+    demoAudio.addEventListener('error', function () {
+      demoAudio.style.display = 'none';
+    });
+    document.querySelectorAll('[data-play-demo]').forEach(function (link) {
+      link.addEventListener('click', function (e) {
+        var target = document.getElementById('demo');
+        if (target && target.scrollIntoView) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        var intro = document.getElementById('audio-presentacion-player');
+        if (intro && !intro.paused) intro.pause();
+        var play = demoAudio.play();
+        if (play && play.catch) play.catch(function () {});
+      });
+    });
+  })();
