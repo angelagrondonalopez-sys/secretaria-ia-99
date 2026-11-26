@@ -1,4 +1,4 @@
-# Landing SEO e indexable: Secretaria virtual IA económica (99 €/mes + IVA).
+# Landing SEO e indexable: Secretaria virtual IA económica (129 €/mes + IVA, antes 149 €).
 User-agent: *
 Allow: /
 

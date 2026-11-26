@@ -113,21 +113,21 @@
       var el = form.elements[n];
       return el ? String(el.value || '').trim() : '';
     }
-    var landing = form.getAttribute('data-landing') || (val('plan').indexOf('149') !== -1 ? '149' : '99');
+    var landing = form.getAttribute('data-landing') || '99';
     var datos = {
       Nombre: val('nombre'),
       Telefono: val('telefono'),
       'Negocio o sector': val('sector'),
       Provincia: val('provincia'),
       Plan: val('plan') || 'No indicado',
-      Landing: landing === '149' ? 'Secretaria IA 149 €' : 'Secretaria IA 99 €',
+      Landing: landing === '149' ? 'Secretaria IA + Google Ads 129 €' : 'Secretaria IA 129 €',
       'Acepta privacidad y llamada': form.elements['privacidad'] && form.elements['privacidad'].checked ? 'Sí' : 'No',
       GCLID: val('gclid') || '—',
       UTM: val('utm') || '—',
       Pagina: location.href,
       Fecha: new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' }),
       access_key: WEB3FORMS_KEY,
-      subject: 'Nueva solicitud Secretaria IA ' + (landing === '149' ? '149' : '99') + ' €',
+      subject: 'Nueva solicitud Secretaria IA 129 €',
       from_name: 'Secretaria IA · Grupo Loang',
       _honey: val('_honey')
     };
